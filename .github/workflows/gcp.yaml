@@ -25,7 +25,7 @@ jobs:
 
     - name: Configure Docker Client
       run: |-
-        gcloud auth activate-service-account ACCOUNT --key-file=kouyazlab-370817-2d19eb4fcc5a
+        gcloud auth activate-service-account ACCOUNT --key-file=${{ secrets.SERVICE_ACCOUNT_KEY }}
         gcloud auth configure-docker --quiet
     - name: Push Docker Image to Container Registry (GCR)
       env:
