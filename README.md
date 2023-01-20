@@ -22,4 +22,4 @@ If you commit and push any changes on the Flask project;
 - The automatically tagged image is pushed to the Google Cloud Container Registry.
 - The Flask project deployed on GKE is automatically updated with the newly tagged image.
 
-![Alt text](NewArch.png?raw=true "Title")
+![Alt text](New_Arch.png?raw=true "Title")
