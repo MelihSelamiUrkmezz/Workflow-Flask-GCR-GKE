@@ -8,8 +8,8 @@ jobs:
     name: Build and Push to GCP
     runs-on: ubuntu-latest
     env:
-      IMAGE_NAME: gcexample
-      PROJECT_ID: kouyazlab-370817
+      IMAGE_NAME: ${{ secrets.IMAGE_NAME  }}
+      PROJECT_ID: ${{ secrets.PROJECT_ID  }}
       GCLOUD_SERVICE_KEY: ${{ secrets.SERVICE_ACCOUNT_KEY  }}
     steps:
     - name: Checkout
@@ -29,8 +29,9 @@ jobs:
       run: |
         bash ./scripts/git_update.sh -v patch
 
-    - name: Configure Docker Client
+    - name: Configure Docker Client and K8s
       run: |-
+        gcloud container clusters get-credentials ${{ secrets.GKE  }}
         echo "$GCLOUD_SERVICE_KEY" > ${HOME}/.docker/gcloud-service-key.json
         gcloud auth activate-service-account --key-file ${HOME}/.docker/gcloud-service-key.json
         gcloud auth configure-docker
@@ -43,4 +44,5 @@ jobs:
         docker tag $IMAGE_NAME:latest gcr.io/$PROJECT_ID/$IMAGE_NAME:$GIT_TAG
         docker push gcr.io/$PROJECT_ID/$IMAGE_NAME:latest
         docker push gcr.io/$PROJECT_ID/$IMAGE_NAME:$GIT_TAG
+        kubectl set image deployment/automated-nginx ${{ secrets.IMAGE  }}=${{ secrets.IMAGE  }}
    
