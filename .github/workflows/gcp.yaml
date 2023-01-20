@@ -49,5 +49,5 @@ jobs:
         docker tag $IMAGE_NAME:latest gcr.io/$PROJECT_ID/$IMAGE_NAME:$GIT_TAG
         docker push gcr.io/$PROJECT_ID/$IMAGE_NAME:latest
         docker push gcr.io/$PROJECT_ID/$IMAGE_NAME:$GIT_TAG
-        kubectl set image deployment/automated-nginx nginx=${{ secrets.IMAGE  }}
-   
+        kubectl set image deployment/automated-nginx nginx=gcr.io/kouyazlab-370817/gcexample:$GIT_TAG
+       
