@@ -22,7 +22,7 @@ jobs:
         export_default_credentials: true
     - name: Deploy to GKE
       run: |
-        gcloud container clusters get-credentials ${{ secrets.GKE_CLUSTER_NAME }} --zone ${{ secrets.GKE_ZONE }} --project ${{ secrets.GKE_PROJECT_ID }}
+        gcloud container clusters get-credentials ${{ secrets.GKE_CLUSTER_NAME }} --zone ${{ secrets.GKE_ZONE }} --project ${{ secrets.PROJECT_ID }}
 
     - name: Build Docker Image
       run: docker build -t $IMAGE_NAME:latest .
