@@ -75,7 +75,7 @@ def healthcheck():
     except:
       return "Unhealthy"
   
-  @app.route("/apinfo")
+@app.route("/apinfo",methods=['GET'])
 def get_api_info():
     return "<p> Hello! This api doing user crud process. </p>"
   
