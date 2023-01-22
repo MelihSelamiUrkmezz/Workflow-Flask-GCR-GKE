@@ -33,7 +33,7 @@ jobs:
     - name: Automatic Tagging of Releases
       id: increment-git-tag
       run: |
-        bash ./scripts/git_update.sh -v patch
+        bash ./scripts/git_update.sh 
 
     - name: Configure Docker Client
       run: |-
@@ -43,7 +43,7 @@ jobs:
   
     - name: Push Docker Image to Container Registry (GCR)
       env:
-        GIT_TAG:  ${{ steps.increment-git-tag.outputs.git-tag }}
+        GIT_TAG: ${{ steps.increment-git-tag.outputs.git-tag }}
       run: |-
         docker tag $IMAGE_NAME:latest gcr.io/$PROJECT_ID/$IMAGE_NAME:latest
         docker tag $IMAGE_NAME:latest gcr.io/$PROJECT_ID/$IMAGE_NAME:$GIT_TAG
