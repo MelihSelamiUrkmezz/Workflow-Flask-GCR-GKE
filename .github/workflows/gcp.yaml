@@ -30,7 +30,7 @@ jobs:
     - name: Build Docker Image
       run: docker build -t $IMAGE_NAME:latest .
 
-    - name: Set the value
+    - name: Set the new Docker Image Tag
       id: step_one
       run: |
         echo "FOO=$(bash ./scripts/git_update.sh)" >> $GITHUB_ENV
