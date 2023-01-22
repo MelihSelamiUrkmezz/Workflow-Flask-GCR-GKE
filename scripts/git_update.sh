@@ -6,5 +6,4 @@ image="gcr.io/kouyazlab-370817/gcexample"
 timestamp=$(date +%Y%m%d%H%M%S)
 
 tag=$timestamp
-
 echo $tag

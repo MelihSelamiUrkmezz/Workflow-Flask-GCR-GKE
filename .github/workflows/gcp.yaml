@@ -30,10 +30,10 @@ jobs:
     - name: Build Docker Image
       run: docker build -t $IMAGE_NAME:latest .
 
-    - name: Automatic Tagging of Releases
-      id: increment-git-tag
+    - name: Set the value
+      id: step_one
       run: |
-        bash ./scripts/git_update.sh 
+        echo "FOO=$(bash ./scripts/git_update.sh)" >> $GITHUB_ENV
 
     - name: Configure Docker Client
       run: |-
@@ -43,7 +43,7 @@ jobs:
   
     - name: Push Docker Image to Container Registry (GCR)
       env:
-        GIT_TAG: ${{ steps.increment-git-tag.outputs.git-tag }}
+        GIT_TAG: "${{ env.FOO }}"
       run: |-
         docker tag $IMAGE_NAME:latest gcr.io/$PROJECT_ID/$IMAGE_NAME:latest
         docker tag $IMAGE_NAME:latest gcr.io/$PROJECT_ID/$IMAGE_NAME:$GIT_TAG
