@@ -61,20 +61,19 @@ def add_or_get_users():
           mydb.commit()
           return str(mycursor.rowcount)+" record deleted."
         except:
-          return 'User is not found!'
-     
-     
-      
-
-      
-    
-       
-     
-    
+          return 'User is not found!' 
 @app.route("/")
 def hello_world():
     return "<p> Hello </p>"
   
+@app.route("/healthcheck",methods=['GET'])
+def healthcheck():
+    try: 
+      mycursor.execute("SELECT * FROM users")
+      myresult = mycursor.fetchall()
+      return "Healthy"
+    except:
+      return "Unhealthy"
   
 if __name__ == '__main__':
   app.run("0.0.0.0",debug=True,port=5001)
