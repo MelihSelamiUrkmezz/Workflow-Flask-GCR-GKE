@@ -75,5 +75,10 @@ def healthcheck():
     except:
       return "Unhealthy"
   
+  @app.route("/apinfo")
+def get_api_info():
+    return "<p> Hello! This api doing user crud process. </p>"
+  
+  
 if __name__ == '__main__':
   app.run("0.0.0.0",debug=True,port=5001)
