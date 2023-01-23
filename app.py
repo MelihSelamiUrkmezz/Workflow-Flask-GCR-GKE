@@ -71,9 +71,9 @@ def healthcheck():
     try: 
       mycursor.execute("SELECT * FROM users")
       myresult = mycursor.fetchall()
-      return "Healthy"
+      return "Healthy", 200
     except:
-      return "Unhealthy"
+      return "Unhealthy", 500
   
 @app.route("/apinfo",methods=['GET'])
 def get_api_info():
